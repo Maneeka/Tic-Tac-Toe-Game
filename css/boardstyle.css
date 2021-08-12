@@ -12,9 +12,10 @@ body{
 }
 
 .board{
+    display: none;
     width: 100vw;
     height: 100vh;
-    display: grid;
+    /* display: grid; */
     justify-content: center;
     align-content: center;
     justify-items: center;
@@ -150,4 +151,8 @@ body{
 
 .winning-message.show {
     display: flex;
+}
+
+.board.show{
+    display: grid;
 }

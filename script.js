@@ -17,11 +17,19 @@ const winningMessageTextElement = document.querySelector('[data-winning-message-
 const restartButton = document.getElementById('restartButton')
 let circleTurn //to indicate if it is x or circles turn
 
-startGame()
+const spButton = document.getElementById("singlePlayer")
+const dpButton = document.getElementById("doublePlayer")
 
-restartButton.addEventListener('click', startGame)
+dpButton.addEventListener('click', startGameDP)
 
-function startGame(){
+
+// // // start of 2 player logic
+// startGameDP()
+
+restartButton.addEventListener('click', startGameDP)
+
+function startGameDP(){
+    board.classList.add('show')
     circleTurn = false
     cellElements.forEach(cell => {
         cell.classList.remove(X_CLASS)
