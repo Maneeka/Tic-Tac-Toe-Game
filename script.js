@@ -21,22 +21,21 @@ const spButton = document.getElementById("singlePlayer")
 const dpButton = document.getElementById("doublePlayer")
 
 dpButton.addEventListener('click', startGameDP)
+spButton.addEventListener('click', startGameSP)
 
-
-// // // start of 2 player logic
-// startGameDP()
 
 restartButton.addEventListener('click', startGameDP)
 
+// start of double player logic
 function startGameDP(){
     board.classList.add('show')
     circleTurn = false
     cellElements.forEach(cell => {
         cell.classList.remove(X_CLASS)
         cell.classList.remove(CIRCLE_CLASS)
-        cell.removeEventListener('click', handleClick)
+        cell.removeEventListener('click', handleClickDP)
 
-        cell.addEventListener('click', handleClick, {once : true})
+        cell.addEventListener('click', handleClickDP, {once : true})
     })
 
     setBoardHoverClass()
@@ -45,7 +44,7 @@ function startGameDP(){
 
 
 
-function handleClick(e){
+function handleClickDP(e){
     const cell = e.target
     const currentClass = circleTurn ? CIRCLE_CLASS : X_CLASS
 
@@ -106,4 +105,41 @@ function isDraw(){
         return cell.classList.contains(X_CLASS) || 
         cell.classList.contains(CIRCLE_CLASS)
     })
+}
+
+//start of single player logic
+function startGameSP(){
+    board.classList.add('show')
+    circleTurn = false
+    cellElements.forEach(cell => {
+        cell.classList.remove(X_CLASS)
+        cell.classList.remove(CIRCLE_CLASS)
+        cell.removeEventListener('click', handleClickSP)
+
+        cell.addEventListener('click', handleClickSP, {once : true})
+    })
+
+}
+
+function handleClickSP(e){
+    const cell = e.target
+    //click on a cell is handled only as long as it has not 
+    //been occupied by the AI, i.e, circle 
+    if(!cell.classList.contains(CIRCLE_CLASS)){  
+
+        placeMark(cell, X_CLASS)
+
+        if(checkWin(X_CLASS)){
+            winningMessageTextElement.innerText = 'You win !'
+            winningMessageElement.classList.add('show')
+        } else if(isDraw()){
+            endGame(true)
+        }
+        else{
+            //ai turn. : 
+            // 1. get position(cell) from minimax
+            // 2. place circle mark on that position(cell)
+        }
+
+    }
 }
