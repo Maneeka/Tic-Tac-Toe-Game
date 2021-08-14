@@ -11,6 +11,16 @@ body{
     margin: 0;
 }
 
+.playingOptionsEntry{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .board{
     display: none;
     width: 100vw;
@@ -155,4 +165,8 @@ body{
 
 .board.show{
     display: grid;
+}
+
+.playingOptionsEntry.remove{
+    display: none;
 }

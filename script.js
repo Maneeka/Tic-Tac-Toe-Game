@@ -14,20 +14,26 @@ const cellElements = document.querySelectorAll('[data-cell')
 const board = document.getElementById('board')
 const winningMessageElement = document.getElementById('winningMessage')
 const winningMessageTextElement = document.querySelector('[data-winning-message-text]')
-const restartButton = document.getElementById('restartButton')
 let circleTurn //to indicate if it is x or circles turn
+
 
 const spButton = document.getElementById("singlePlayer")
 const dpButton = document.getElementById("doublePlayer")
+const playingOptionsMessage = document.getElementById('playingOptionsEntry')
+const spButtonAgain = document.getElementById('singlePlayerAgain')
+const dpButtonAgain = document.getElementById('doublePlayerAgain')
 
 dpButton.addEventListener('click', startGameDP)
 spButton.addEventListener('click', startGameSP)
+spButtonAgain.addEventListener('click', startGameSP)
+dpButtonAgain.addEventListener('click', startGameDP)
 
 
-restartButton.addEventListener('click', startGameDP)
 
 // start of double player logic
 function startGameDP(){
+    winningMessageElement.classList.remove('show')
+    playingOptionsMessage.classList.add('remove')
     board.classList.add('show')
     circleTurn = false
     cellElements.forEach(cell => {
@@ -109,8 +115,12 @@ function isDraw(){
 
 //start of single player logic
 function startGameSP(){
-    board.classList.add('show')
+    winningMessageElement.classList.remove('show')
+    playingOptionsMessage.classList.add('remove')
     circleTurn = false
+
+    board.classList.add('show')
+    board.classList.add(X_CLASS)
     cellElements.forEach(cell => {
         cell.classList.remove(X_CLASS)
         cell.classList.remove(CIRCLE_CLASS)
@@ -136,10 +146,42 @@ function handleClickSP(e){
             endGame(true)
         }
         else{
-            //ai turn. : 
-            // 1. get position(cell) from minimax
-            // 2. place circle mark on that position(cell)
+            circleTurn = true
+            aiTurn()
+            circleTurn = false
         }
 
     }
 }
+
+function aiTurn(){
+    
+    let pos
+    gridCells = Array.from(board.children) //array of the 9 cells
+
+    do{ //get position(cell)
+        pos = minimax()
+    }while(gridCells[pos].classList.contains(X_CLASS) || gridCells[pos].classList.contains(CIRCLE_CLASS));
+
+    
+    placeMark(gridCells[pos], CIRCLE_CLASS)
+
+    //checking for win/draw
+    if(checkWin(CIRCLE_CLASS)){
+        winningMessageTextElement.innerText = 'Computer wins !'
+        winningMessageElement.classList.add('show')
+    } else if(isDraw()){
+        endGame(true)
+    } else{
+        board.classList.add(X_CLASS)
+    }
+}
+
+function minimax(){
+    function getRandomInt(max) {
+        return Math.floor(Math.random() * max);
+      }
+
+      return getRandomInt(9)
+}
+
