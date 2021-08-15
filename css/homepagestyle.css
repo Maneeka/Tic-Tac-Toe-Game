@@ -34,6 +34,21 @@
     font-size: 25px;
 }
 
-.startGame{
+.startPlaying{
     text-align: center;
+    font-size: 2em;
+}
+
+.startPlaying button{
+    font-size: 3rem;
+    background-color: white;
+    border: 1px solid black;
+    padding: .25em .5em;
+    cursor: pointer;
+}
+
+.startPlaying button:hover{
+    background-color: black;
+    color: white;
+    border-color: white;
 }
