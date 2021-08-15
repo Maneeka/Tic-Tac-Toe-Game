@@ -40,6 +40,7 @@ function startGameDP(){
         cell.classList.remove(X_CLASS)
         cell.classList.remove(CIRCLE_CLASS)
         cell.removeEventListener('click', handleClickDP)
+        cell.removeEventListener('click', handleClickSP)
 
         cell.addEventListener('click', handleClickDP, {once : true})
     })
@@ -120,11 +121,14 @@ function startGameSP(){
     circleTurn = false
 
     board.classList.add('show')
+    board.classList.remove(CIRCLE_CLASS)
     board.classList.add(X_CLASS)
+
     cellElements.forEach(cell => {
         cell.classList.remove(X_CLASS)
         cell.classList.remove(CIRCLE_CLASS)
         cell.removeEventListener('click', handleClickSP)
+        cell.removeEventListener('click', handleClickDP)
 
         cell.addEventListener('click', handleClickSP, {once : true})
     })
