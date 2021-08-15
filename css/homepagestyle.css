@@ -1,4 +1,39 @@
-.bg{
-    background-color: #ccc;
+*{
+    margin: 0;
+    padding: 0;
 }
 
+.bg{
+    background-color: rgb(172, 182, 190);
+}
+
+#header{
+    height: 60px;
+    padding-top: 20px;
+    background-color: rgb(16, 22, 34);
+    color: white;
+    text-align: center;
+    border-bottom: 2px solid rgb(221, 211, 211);
+}
+
+.container{
+    margin-top: 30px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.container img{
+    width: 30%;
+}
+
+.instructionsContainer{
+    margin-left: 30px;
+}
+
+.instructions{
+    font-size: 25px;
+}
+
+.startGame{
+    text-align: center;
+}
