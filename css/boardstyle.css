@@ -15,10 +15,16 @@ body{
     display: flex;
     width: 100vw;
     height: 100vh;
+    background-color: rgba(0, 0, 0, .9);
+    font-size: 4em;
     position: fixed;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.playingOptionsEntry h2{
+    color: white;
 }
 
 .board{
@@ -145,7 +151,8 @@ body{
     flex-direction: column;
 }
 
-.winning-message button{
+.winning-message button,
+.playingOptionsEntry button{
     font-size: 3rem;
     background-color: white;
     border: 1px solid black;
@@ -153,7 +160,8 @@ body{
     cursor: pointer;
 }
 
-.winning-message button:hover{
+.winning-message button:hover,
+.playingOptionsEntry button:hover{
     background-color: black;
     color: white;
     border-color: white;
