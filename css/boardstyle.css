@@ -178,3 +178,33 @@ body{
 .playingOptionsEntry.remove{
     display: none;
 }
+
+/* responsove design */
+
+@media screen and (max-width: 900px) {
+    
+    .playingOptionsEntry h2{
+        font-size: 50px;
+        text-align: center;
+    }
+
+    #singlePlayer{
+        font-size: 30px;
+    }
+
+    #doublePlayer{
+        font-size: 30px; 
+    }
+
+    #singlePlayerAgain{
+        font-size: 30px; 
+    }
+
+    #doublePlayerAgain{
+        font-size: 30px;
+    }
+    
+    #declareWinnerText{
+        font-size: 50px;
+    }
+}
