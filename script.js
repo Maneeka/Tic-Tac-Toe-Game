@@ -160,12 +160,22 @@ function handleClickSP(e){
 
 function aiTurn(){
     
+    let gridCells = Array.from(board.children) //array of the 9 cells
+    let bestScore = -Infinity
     let pos
-    gridCells = Array.from(board.children) //array of the 9 cells
 
-    do{ //get position(cell)
-        pos = minimax()
-    }while(gridCells[pos].classList.contains(X_CLASS) || gridCells[pos].classList.contains(CIRCLE_CLASS));
+    for (let index = 0; index < 9; ++index) {
+        if(!gridCells[index].classList.contains(X_CLASS) && !gridCells[index].classList.contains(CIRCLE_CLASS) ){
+            gridCells[index].classList.add(CIRCLE_CLASS)
+            let score = minimax(gridCells, 0, false)
+            gridCells[index].classList.remove(CIRCLE_CLASS)
+            
+            if(score > bestScore){
+                bestScore = score
+                pos = index
+            }
+        }
+    }
 
     
     placeMark(gridCells[pos], CIRCLE_CLASS)
@@ -181,11 +191,44 @@ function aiTurn(){
     }
 }
 
-function minimax(){
-    function getRandomInt(max) {
-        return Math.floor(Math.random() * max);
-      }
+function minimax(gridCells, depth, isMaximizing){
+    if(checkWin(CIRCLE_CLASS)){ 
+        return 1
+    } else if (checkWin(X_CLASS)){
+        return -1
+    }
+    else if (isDraw()){
+        return 0
+    }
 
-      return getRandomInt(9)
+    if(isMaximizing){
+        let bestScore = -Infinity
+     
+        for (let index = 0; index < 9; index++) {
+            if(!gridCells[index].classList.contains(X_CLASS) && !gridCells[index].classList.contains(CIRCLE_CLASS) ){
+                gridCells[index].classList.add(CIRCLE_CLASS)
+                let score = minimax(gridCells, depth+1, false)
+                gridCells[index].classList.remove(CIRCLE_CLASS)
+                bestScore = Math.max(score, bestScore)
+            }
+        }
+
+        return bestScore
+    }
+    else{ //not maximizing
+        let bestScore = Infinity
+
+        for (let index = 0; index < 9; index++) {
+            if(!gridCells[index].classList.contains(X_CLASS) && !gridCells[index].classList.contains(CIRCLE_CLASS) ){
+                gridCells[index].classList.add(X_CLASS)
+                let score = minimax(gridCells, depth+1, true)
+                gridCells[index].classList.remove(X_CLASS)
+                bestScore = Math.min(score, bestScore)
+            }
+        }
+
+        return bestScore
+    }
+    
 }
 
